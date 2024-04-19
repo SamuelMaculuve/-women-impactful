@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="container px-3">
       <a href="#" class="navbar-brand pe-3">
         <img src="@/assets/logo.svg"  width="47" alt="Silicon">
-        Silicon
+        Women Techmakers Maputo
       </a>
     </div>
   </header>

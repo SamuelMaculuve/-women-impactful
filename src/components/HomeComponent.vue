@@ -8,47 +8,35 @@ import CardComponent from './CardComponent.vue'
     <div class="row g-0">
       <div class="col-xl-7 col-lg-6 pe-lg-5">
         <div class="d-flex h-100 pe-xl-4">
-          <video class="w-100" autoplay muted loop style="object-fit: cover;">
-            <source :src="'src/assets/img/landing/conference/hero-video.mp4'" type="video/mp4">
+          <video class="w-75" autoplay muted loop style="object-fit: cover;">
+            <source :src="heroVideo" type="video/mp4">
           </video>
         </div>
       </div>
       <div class="col-xl-5 col-lg-6 position-relative py-5">
-        <img :src="'src/assets/img/landing/conference/hero-bg.png'" class="position-absolute top-50 translate-middle-y ms-lg-n4" width="866" alt="Background shapes">
+        <img :src="heroBg" class="position-absolute top-50 translate-middle-y ms-lg-n4" width="866" alt="Background shapes">
         <div class="position-relative zindex-5 text-center text-lg-start px-3 px-lg-0 py-xl-4 py-xxl-5 mt-lg-3 mx-auto mx-lg-0" style="max-width: 530px;">
           <h1 class="display-1 pb-lg-3 mb-3">Mulheres Impactantes em Moçambique</h1>
         </div>
       </div>
     </div>
-    <div class="position-absolute d-none d-lg-block bottom-0 start-0 w-100 zindex-5 pb-xxl-5">
-      <div class="container pb-4 mb-3 mb-xxl-0">
-        <a href="#speakers" class="d-table text-light opacity-80 text-decoration-none w-auto py-4" data-scroll data-scroll-offset="70">
-              <span class="d-flex align-items-center">
-                Scroll para ver mais
-                <i class="bx bx-down-arrow-circle fs-3 ms-2"></i>
-              </span>
-        </a>
-      </div>
-    </div>
   </section>
   <hr>
-  <!-- Speakers -->
+
   <section id="speakers" class="container my-2 my-md-4 my-lg-5">
-    <div class="d-md-flex align-items-center justify-content-between text-center text-md-start pt-md-1 pt-lg-3">
-      <h2 class="h1 mb-4 mb-md-0 me-md-3">Mulheres Impactantes</h2>
-    </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-2 mt-lg-4">
-
       <card-component></card-component>
-
     </div>
   </section>
 
+  <hr>
   <section class="container pb-5 mb-2 mb-md-4 mb-lg-5 mt-n3 mt-lg-0">
     <div class="row pt-xl-2 pb-md-3">
       <div class="col-lg-5 mb-4 mb-lg-0">
         <h2 class="h1 text-center text-sm-start mb-4">Women Techmakers Maputo🤩💙</h2>
-        <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">Et, morbi at sagittis vehicula rutrum. Lacus tortor, quam arcu mi et, at lectus leo nunc. Mattis cras auctor vel pharetra tempor. Rhoncus pellentesque habitant ac tempor. At aliquam euismod est in praesent ornare etiam id. Faucibus libero sit vehicula sed condimentum. Vitae in nam porttitor rutrum sed aliquam donec sed. Sapien facilisi lectus.</p>
+        <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">
+          A página "Mulheres Impactantes em Moçambique" criada pela Women Techmakers Maputo é um espaço dedicado a reconhecer e destacar o impacto positivo das mulheres em Moçambique. Nesta página, podemos encontrar histórias inspiradoras, conquistas significativas e contribuições notáveis das mulheres moçambicanas em diversas áreas, como tecnologia, ciência, negócios, arte, educação e muito mais.
+        </p>
       </div>
       <div class="col-xl-6 col-lg-7 offset-xl-1 position-relative">
 
@@ -62,12 +50,10 @@ import CardComponent from './CardComponent.vue'
                 <div class="text-center text-sm-start me-sm-4">
                   <h3 class="h1 text-light">Conheces uma mulher inspiradora?</h3>
                 </div>
-                <div class="d-table bg-white rounded-3 p-4 flex-shrink-0 mx-auto mx-sm-0">
-                  <img :src="'assets/img/landing/conference/qr.png'" width="102" alt="QR Code">
-                </div>
+
               </div>
               <div class="d-flex flex-column flex-sm-row align-items-center pt-4 mt-2">
-                <a href="#" class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3">partilhar aqui</a>
+                <a href="https://forms.gle/tFLjtncXBQPEf13M8" target="_blank" class="btn btn-light btn-lg mb-3 mb-sm-0 me-sm-3">partilhar aqui</a>
                 <div class="d-flex align-items-center">
                 </div>
               </div>
@@ -88,3 +74,20 @@ import CardComponent from './CardComponent.vue'
   </section>
 
 </template>
+<script>
+
+
+</script>
+<script>
+import heroVideo from '@/assets/img/landing/conference/hero-video.mp4';
+import heroBg from '@/assets/img/landing/conference/hero-bg.png';
+
+export default {
+  data() {
+    return {
+      heroVideo: heroVideo,
+      heroBg: heroBg,
+    };
+  }
+};
+</script>
