@@ -23,13 +23,13 @@ import CardComponent from './CardComponent.vue'
   </section>
   <hr>
   <card-component></card-component>
-  <hr>
+
   <section class="container pb-5 mb-2 mb-md-4 mb-lg-5 mt-n3 mt-lg-0">
     <div class="row pt-xl-2 pb-md-3">
       <div class="col-lg-5 mb-4 mb-lg-0">
         <h2 class="h1 text-center text-sm-start mb-4">Women Techmakers Maputo🤩💙</h2>
         <p class="pb-2 pb-lg-4 pb-xl-5 mb-3">
-          A página "Mulheres Impactantes em Moçambique" criada pela Women Techmakers Maputo é um espaço dedicado a reconhecer e destacar o impacto positivo das mulheres em Moçambique. Nesta página, podemos encontrar histórias inspiradoras, conquistas significativas e contribuições notáveis das mulheres moçambicanas em diversas áreas, como tecnologia, ciência, negócios, arte, educação e muito mais.
+          A página <b class="wtm-color">Mulheres Impactantes em Moçambique</b> criada pela Women Techmakers Maputo é um espaço dedicado a reconhecer e destacar o impacto positivo das mulheres em Moçambique. Nesta página, podemos encontrar histórias inspiradoras, conquistas significativas e contribuições notáveis das mulheres moçambicanas em diversas áreas, como tecnologia, ciência, negócios, arte, educação e muito mais.
         </p>
       </div>
       <div class="col-xl-6 col-lg-7 offset-xl-1 position-relative">
@@ -85,3 +85,8 @@ export default {
   }
 };
 </script>
+<style>
+.wtm-color{
+  color: #8cb3ec;
+}
+</style>
