@@ -22,13 +22,7 @@ import CardComponent from './CardComponent.vue'
     </div>
   </section>
   <hr>
-
-  <section id="speakers" class="container my-2 my-md-4 my-lg-5">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-2 mt-lg-4">
-      <card-component></card-component>
-    </div>
-  </section>
-
+  <card-component></card-component>
   <hr>
   <section class="container pb-5 mb-2 mb-md-4 mb-lg-5 mt-n3 mt-lg-0">
     <div class="row pt-xl-2 pb-md-3">

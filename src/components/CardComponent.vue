@@ -3,51 +3,71 @@
 </script>
 
 <template>
-  <div v-for="(item, index) in sortedItems" :key="index" class="item">
-    <div class="col">
-      <div class="card card-hover border-0 bg-transparent">
-        <div class="position-relative">
-          <img :src="item.photo" class="rounded-3" :alt="item.name">
-          <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
-            <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
-            <div class="position-relative d-flex zindex-2">
-              <a :href="item.linkedin_link" target="_blank" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2" aria-label="LinkedIn">
-                <i class="bx bxl-linkedin"></i>
-              </a>
-              <a href="#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white" aria-label="LinkedIn" data-bs-toggle="modal" :data-bs-target="'#staticWomanDialog' + index">
-                <i class='bx bx-window-open' ></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="card-body text-center p-3">
-          <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ item.name }}</h3>
-          <p class="fs-sm mb-0">{{ item.role }}</p>
+  <section id="speakers" class="container my-2 my-md-4 my-lg-5">
+    <div class="row height d-flex justify-content-center align-items-center">
+      <div class="col-md-6">
+        <div class="form">
+          <i class='bx bx-search-alt'></i>
+          <input type="text" class="form-control form-input"
+                 v-model="searchQuery" placeholder="Pesquisar por nome ou cargo">
         </div>
       </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" :id="'staticWomanDialog' + index" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticWomanDialogLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content bg-wtm">
-          <div class="modal-header">
-            <h5 class="modal-title text-white" id="staticWomanDialogLabel">{{ item.name }}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="text-center" v-if="!item.description">
-               <img  :src="defaultImage" alt="Default Image" class="defaultImage"  />
-                <p class="text-white"><b>Sem biografia</b></p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-2 mt-lg-4">
+      <div v-if="sortedFilteredItems.length > 0" v-for="(item, index) in sortedFilteredItems" :key="index" class="item">
+        <div class="col">
+          <div class="card card-hover border-0 bg-transparent">
+            <div class="position-relative">
+              <img :src="item.photo" class="rounded-3" :alt="item.name">
+              <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center rounded-3">
+                <span class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"></span>
+                <div class="position-relative d-flex zindex-2">
+                  <a :href="item.linkedin_link" target="_blank" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white me-2" aria-label="LinkedIn">
+                    <i class="bx bxl-linkedin"></i>
+                  </a>
+                  <a href="#" class="btn btn-icon btn-secondary btn-linkedin btn-sm bg-white" aria-label="LinkedIn" data-bs-toggle="modal" :data-bs-target="'#staticWomanDialog' + index">
+                    <i class='bx bx-window-open' ></i>
+                  </a>
+                </div>
+              </div>
             </div>
-            <p class="text-white " v-else>{{ item.description }}</p>
+            <div class="card-body text-center p-3">
+              <h3 class="fs-lg fw-semibold pt-1 mb-2">{{ item.name }}</h3>
+              <p class="fs-sm mb-0">{{ item.role }}</p>
+            </div>
           </div>
-
         </div>
-      </div>
-    </div>
 
-  </div>
+        <!-- Modal -->
+        <div class="modal fade" :id="'staticWomanDialog' + index" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticWomanDialogLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-wtm">
+              <div class="modal-header">
+                <h5 class="modal-title text-white" id="staticWomanDialogLabel">{{ item.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="text-center" v-if="!item.description">
+                  <img  :src="defaultImage" alt="Default Image" class="defaultImage"  />
+                  <p class="text-white"><b>Sem biografia</b></p>
+                </div>
+                <p class="text-white " v-else>{{ item.description }}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center" v-else>
+        <img  :src="defaultImage" alt="Default Image" class="defaultImage"  />
+        <p class="text-danger"><b>Nenhum resultado encontrado</b></p>
+      </div>
+
+    </div>
+  </section>
 
 </template>
 <script>
@@ -179,17 +199,24 @@ export default {
           photo: anchaPedro,
           description: '',
         },
-      ]
+      ],
+      searchQuery: '',
     };
   },
   computed: {
-    sortedItems() {
-      // Use slice() to create a copy of the original array
-      return this.items.slice().sort((a, b) => {
-        // Compare item names alphabetically
-        return a.name.localeCompare(b.name);
-      });
-    }
+    filteredItems() {
+      // Filter items based on searchQuery in name or role
+      return this.items.filter(item =>
+          item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          item.role.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    },
+    sortedFilteredItems() {
+      // Sort filteredItems alphabetically
+      return this.filteredItems.slice().sort((a, b) =>
+          a.name.localeCompare(b.name)
+      );
+    },
   }
 };
 </script>
@@ -200,5 +227,49 @@ export default {
   .bg-wtm{
     background-color: rgb(79,143,241) !important;
     text-align: left;
+  }
+//search
+
+  .height{
+
+    height: 100vh;
+  }
+
+  .form{
+    position: relative;
+  }
+
+  .form .bx-search-alt{
+    position: absolute;
+    top:20px;
+    left: 20px;
+    color: #9ca3af;
+
+  }
+  .form span{
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+  }
+
+  .left-pan{
+    padding-left: 7px;
+  }
+
+  .left-pan i{
+    padding-left: 10px;
+  }
+
+  .form-input{
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+  }
+
+  .form-input:focus{
+    box-shadow: none;
+    border-color: #8cb3ec;
   }
 </style>
